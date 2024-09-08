@@ -7,6 +7,7 @@ import clsx from "clsx";
 
 import "@/styles/globals.css";
 import { Footer } from "@/components/footer";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+          <Toaster />
         </Providers>
       </body>
     </html>

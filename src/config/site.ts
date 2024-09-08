@@ -102,3 +102,39 @@ At File Converter, we are dedicated to protecting your privacy. This Privacy Pol
 
 By using File Converter, you agree to the practices described in this Privacy Policy. If you do not agree, please discontinue use of our services. Thank you for trusting us with your privacy.
 `;
+
+export const fileExtensions: Record<string, string[]> = {
+  image: [
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "bmp",
+    "webp",
+    "ico",
+    "tif",
+    "tiff",
+    "svg",
+    "raw",
+    "tga",
+  ],
+  video: [
+    "mp4",
+    "m4v",
+    "mp4v",
+    "3gp",
+    "3g2",
+    "avi",
+    "mov",
+    "wmv",
+    "mkv",
+    "flv",
+    "ogv",
+    "webm",
+    "h264",
+    "264",
+    "hevc",
+    "265",
+  ],
+  audio: ["mp3", "wav", "ogg", "aac", "wma", "flac", "m4a"],
+};
