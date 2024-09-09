@@ -3,11 +3,11 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { geistMono, geistSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Toaster } from "react-hot-toast";
 import clsx from "clsx";
 
 import "@/styles/globals.css";
-import { Footer } from "@/components/footer";
-import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: {
