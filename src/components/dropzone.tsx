@@ -6,7 +6,7 @@ import { LuFileSymlink } from 'react-icons/lu';
 import { toast } from '@/components/toast';
 import { ConvertAction } from '@/types';
 import {
-  Badge,
+  Chip,
   Button,
   Card,
   CardBody,
@@ -33,6 +33,8 @@ import fileToIcon from '@/types/file-to-icon';
 import { fileExtensions } from '@/config/site';
 
 export default function MyDropzone() {
+  const selectSectionClass =
+    'flex w-full sticky top-1 z-20 py-1.5 px-2 bg-default-100 shadow-small rounded-small';
   const [isHover, setIsHover] = useState<boolean>(false);
   const [actions, setActions] = useState<ConvertAction[]>([]);
   const [is_ready, setIsReady] = useState<boolean>(false);
@@ -153,7 +155,6 @@ export default function MyDropzone() {
     setActions(
       actions.map((action): ConvertAction => {
         if (action.file_name === file_name) {
-          console.log('FOUND');
           return {
             ...action,
             to,
@@ -188,10 +189,24 @@ export default function MyDropzone() {
   useEffect(() => {
     load();
   }, []);
+
   const load = async () => {
     const ffmpeg_response: FFmpeg = await loadFfmpeg();
     ffmpegRef.current = ffmpeg_response;
     setIsLoaded(true);
+  };
+
+  const getDisabledKeys = () => {
+    if (!actions.length) return [];
+
+    const fileType = actions[0].file_type.split('/')[0]; // Get the main type (image, audio, video)
+    if (fileType === 'image') {
+      return [...fileExtensions.video, ...fileExtensions.audio];
+    } else if (fileType === 'video' || fileType === 'audio') {
+      return fileExtensions.image;
+    }
+
+    return [];
   };
 
   if (actions.length) {
@@ -200,12 +215,12 @@ export default function MyDropzone() {
         {actions.map((action: ConvertAction, i: any) => (
           <div
             key={i}
-            className="w-full py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl border h-fit lg:h-20 px-4 lg:px-10 flex flex-wrap lg:flex-nowrap items-center justify-between"
+            className="w-full py-4 space-y-2 md:py-0 relative cursor-pointer rounded-xl border h-fit md:h-20 px-4 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between"
           >
             {!is_loaded && (
               <Skeleton className="h-full w-full -ml-10 cursor-progress absolute rounded-xl" />
             )}
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 items-center whitespace-wrap truncate">
               <span className="text-2xl text-orange-600">
                 {fileToIcon(action.file_type)}
               </span>
@@ -220,32 +235,105 @@ export default function MyDropzone() {
             </div>
 
             {action.is_error ? (
-              <Badge color="danger" className="flex item-center gap-2">
+              <Chip color="danger" startContent={<BiError size={18} />}>
                 <span>Error Converting File</span>
-                <BiError />
-              </Badge>
+              </Chip>
             ) : action.is_converted ? (
-              <Badge color="default" className="flex gap-2 bg-green-500">
+              <Chip color="success" startContent={<MdDone size={18} />}>
                 <span>Done</span>
-                <MdDone />
-              </Badge>
+              </Chip>
             ) : action.is_converting ? (
-              <Badge color="default" className="flex gap-2">
+              <Chip
+                color="primary"
+                startContent={
+                  <span className="animate-spin">
+                    <ImSpinner3 size={18} />
+                  </span>
+                }
+              >
                 <span>Converting</span>
-                <span className="animate-spin">
-                  <ImSpinner3 />
-                </span>
-              </Badge>
+              </Chip>
             ) : (
-              <div className="text-muted-foreground text-md flex items-center gap-4">
-                <span>Convert to</span>
+              <div className="text-muted-foreground text-md flex items-center md:justify-center w-full max-w-xs">
+                <Select
+                  label="Convert to"
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    const value = e.target.value;
+                    if (fileExtensions.audio.includes(value)) {
+                      setDefaultValues('audio');
+                    } else if (fileExtensions.video.includes(value)) {
+                      setDefaultValues('video');
+                    } else if (fileExtensions.image.includes(value)) {
+                      setDefaultValues('image');
+                    }
+                    setSelected(value);
+                    updateAction(action.file_name, value);
+                  }}
+                  disabledKeys={getDisabledKeys()}
+                  placeholder="Select Format"
+                  value={selected}
+                  scrollShadowProps={{
+                    isEnabled: false,
+                  }}
+                  className="max-w-xs md:max-w-md"
+                  size="sm"
+                  aria-label={action.file_name}
+                >
+                  {fileExtensions.image && (
+                    <SelectSection
+                      title="Image"
+                      aria-label="Image"
+                      classNames={{
+                        heading: selectSectionClass,
+                      }}
+                    >
+                      {fileExtensions.image.map((name) => (
+                        <SelectItem key={name} value={name}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectSection>
+                  )}
+                  {fileExtensions.video && (
+                    <SelectSection
+                      title="Video"
+                      aria-label="Video"
+                      classNames={{
+                        heading: selectSectionClass,
+                      }}
+                    >
+                      {fileExtensions.video.map((name) => (
+                        <SelectItem key={name} value={name}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectSection>
+                  )}
+                  {fileExtensions.audio && (
+                    <SelectSection
+                      title="Audio"
+                      aria-label="Audio"
+                      classNames={{
+                        heading: selectSectionClass,
+                      }}
+                    >
+                      {fileExtensions.audio.map((name) => (
+                        <SelectItem key={name} value={name}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectSection>
+                  )}
+                </Select>
+
                 {/* <Select
                   label="Assigned to"
-                  onChange={(value: any) => {
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    const value = e.target.value;
                     if (fileExtensions.audio.includes(value)) {
-                      setDefaultValues("audio");
+                      setDefaultValues('audio');
                     } else if (fileExtensions.video.includes(value)) {
-                      setDefaultValues("video");
+                      setDefaultValues('video');
                     }
                     setSelected(value);
                     updateAction(action.file_name, value);
@@ -257,7 +345,7 @@ export default function MyDropzone() {
                   }}
                 >
                   <>
-                    {action.file_type.includes("image") && (
+                    {action.file_type.includes('image') && (
                       <div className="grid grid-cols-2 gap-2 w-fit">
                         {fileExtensions.image.map((elt, i) => (
                           <SelectItem
@@ -272,7 +360,7 @@ export default function MyDropzone() {
                         ))}
                       </div>
                     )}
-                    {action.file_type.includes("video") && (
+                    {action.file_type.includes('video') && (
                       <Tabs
                         aria-label="Options"
                         defaultSelectedKey={defaultValues}
@@ -318,7 +406,7 @@ export default function MyDropzone() {
                         </Tab>
                       </Tabs>
                     )}
-                    {action.file_type.includes("audio") && (
+                    {action.file_type.includes('audio') && (
                       <div className="grid grid-cols-2 gap-2 w-fit">
                         {fileExtensions.audio.map((elt, i) => (
                           <SelectItem
@@ -345,6 +433,13 @@ export default function MyDropzone() {
             ) : (
               <span
                 onClick={() => deleteAction(action)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    deleteAction(action);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
                 className="cursor-pointer hover:bg-muted rounded-full h-10 w-10 flex items-center justify-center text-2xl text-foreground"
               >
                 <MdClose />
@@ -375,6 +470,7 @@ export default function MyDropzone() {
           ) : (
             <Button
               size="lg"
+              color="default"
               disabled={!is_ready || is_converting}
               className="rounded-xl font-semibold relative py-4 text-md flex items-center w-44"
               onClick={convert}
