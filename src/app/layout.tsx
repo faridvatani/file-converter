@@ -43,16 +43,17 @@ export default function RootLayout({
           geistSans.variable,
           geistMono.variable,
         )}
+        suppressHydrationWarning
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
+            <Toaster />
             <main className="container mx-auto max-w-full pt-4 px-6 flex-grow">
               {children}
             </main>
             <Footer />
           </div>
-          <Toaster />
         </Providers>
       </body>
     </html>
