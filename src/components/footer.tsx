@@ -8,13 +8,14 @@ export const Footer = () => {
       <div className="container mx-auto max-w-7xl px-6 flex-grow flex flex-col md:flex-row items-center justify-between">
         <div className="mb-4 md:mb-0">
           <p className="text-sm">
-            © 2024 - {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            © 2024 - {new Date().getFullYear()} {siteConfig.name}. All rights
+            reserved.
           </p>
         </div>
         <Link
           isExternal
           className="flex items-center gap-1 text-default-600"
-          href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
+          href="https://nextui.org/"
           title="nextui.org homepage"
         >
           <span className="text-default-600">Powered by</span>
