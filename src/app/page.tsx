@@ -1,5 +1,5 @@
-import MyDropzone from "@/components/dropzone";
-import { Hero } from "@/components/hero";
+import MyDropzone from '@/components/dropzone';
+import { Hero } from '@/components/hero';
 
 export default function Home() {
   return (

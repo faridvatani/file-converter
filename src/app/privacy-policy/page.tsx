@@ -1,6 +1,6 @@
-import ReactMarkdown from "react-markdown";
-import { description, title } from "@/components/primitives";
-import { privacyPolicyPageDescription } from "@/config/site";
+import ReactMarkdown from 'react-markdown';
+import { description, title } from '@/components/primitives';
+import { privacyPolicyPageDescription } from '@/config/site';
 
 export default function PrivacyPolicy() {
   return (

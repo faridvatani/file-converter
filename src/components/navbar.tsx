@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -7,16 +7,16 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
-import { link as linkStyles } from "@nextui-org/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
+} from '@nextui-org/navbar';
+import { Link } from '@nextui-org/link';
+import { link as linkStyles } from '@nextui-org/theme';
+import NextLink from 'next/link';
+import clsx from 'clsx';
 
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { Logo } from "@/components/icons";
-import { usePathname } from "next/navigation";
+import { siteConfig } from '@/config/site';
+import { ThemeSwitch } from '@/components/theme-switch';
+import { Logo } from '@/components/icons';
+import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -39,11 +39,11 @@ export const Navbar = () => {
             <NavbarItem key={index} isActive={pathname === item.href}>
               <NextLink
                 className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  linkStyles({ color: 'foreground' }),
+                  'data-[active=true]:text-primary data-[active=true]:font-medium'
                 )}
                 color="foreground"
-                href={item?.href ?? "#"}
+                href={item?.href ?? '#'}
               >
                 {item?.label}
               </NextLink>
@@ -61,8 +61,8 @@ export const Navbar = () => {
           {siteConfig.navItems.map((item, index) => (
             <NavbarMenuItem key={index} isActive={pathname === item.href}>
               <Link
-                color={index === 0 ? "primary" : "foreground"}
-                href={item?.href ?? "#"}
+                color={index === 0 ? 'primary' : 'foreground'}
+                href={item?.href ?? '#'}
                 size="lg"
               >
                 {item?.label}

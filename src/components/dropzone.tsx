@@ -1,10 +1,10 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import Dropzone from "react-dropzone";
-import { FiUploadCloud } from "react-icons/fi";
-import { LuFileSymlink } from "react-icons/lu";
-import { toast } from "@/components/toast";
-import { ConvertAction } from "@/types";
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import Dropzone from 'react-dropzone';
+import { FiUploadCloud } from 'react-icons/fi';
+import { LuFileSymlink } from 'react-icons/lu';
+import { toast } from '@/components/toast';
+import { ConvertAction } from '@/types';
 import {
   Badge,
   Button,
@@ -16,21 +16,21 @@ import {
   Skeleton,
   Tab,
   Tabs,
-} from "@nextui-org/react";
-import { MdClose } from "react-icons/md";
-import { ImSpinner3 } from "react-icons/im";
-import { MdDone } from "react-icons/md";
-import { HiOutlineDownload } from "react-icons/hi";
-import { BiError } from "react-icons/bi";
+} from '@nextui-org/react';
+import { MdClose } from 'react-icons/md';
+import { ImSpinner3 } from 'react-icons/im';
+import { MdDone } from 'react-icons/md';
+import { HiOutlineDownload } from 'react-icons/hi';
+import { BiError } from 'react-icons/bi';
 import {
   loadFfmpeg,
   convert as convertFile,
   compressFileName,
   bytesToSize,
-} from "@/utils";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import fileToIcon from "@/types/file-to-icon";
-import { fileExtensions } from "@/config/site";
+} from '@/utils';
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import fileToIcon from '@/types/file-to-icon';
+import { fileExtensions } from '@/config/site';
 
 export default function MyDropzone() {
   const [isHover, setIsHover] = useState<boolean>(false);
@@ -41,25 +41,25 @@ export default function MyDropzone() {
   const [is_converting, setIsConverting] = useState<boolean>(false);
   const [is_done, setIsDone] = useState<boolean>(false);
   const ffmpegRef = useRef<any>(null);
-  const [defaultValues, setDefaultValues] = useState<string>("video");
-  const [selected, setSelected] = useState<string>("...");
+  const [defaultValues, setDefaultValues] = useState<string>('video');
+  const [selected, setSelected] = useState<string>('...');
 
   const accepted_files = {
-    "image/*": [
-      ".jpg",
-      ".jpeg",
-      ".png",
-      ".gif",
-      ".bmp",
-      ".webp",
-      ".ico",
-      ".tif",
-      ".tiff",
-      ".raw",
-      ".tga",
+    'image/*': [
+      '.jpg',
+      '.jpeg',
+      '.png',
+      '.gif',
+      '.bmp',
+      '.webp',
+      '.ico',
+      '.tif',
+      '.tiff',
+      '.raw',
+      '.tga',
     ],
-    "audio/*": [],
-    "video/*": [],
+    'audio/*': [],
+    'video/*': [],
   };
 
   // functions
@@ -76,8 +76,8 @@ export default function MyDropzone() {
     }
   };
   const download = (action: ConvertAction) => {
-    const a = document.createElement("a");
-    a.style.display = "none";
+    const a = document.createElement('a');
+    a.style.display = 'none';
     a.href = action.url;
     a.download = action.output;
 
@@ -107,7 +107,7 @@ export default function MyDropzone() {
                 url,
                 output,
               }
-            : elt,
+            : elt
         );
         setActions(tmp_actions);
       } catch (err) {
@@ -119,7 +119,7 @@ export default function MyDropzone() {
                 is_converting: false,
                 is_error: true,
               }
-            : elt,
+            : elt
         );
         setActions(tmp_actions);
       }
@@ -136,7 +136,7 @@ export default function MyDropzone() {
       tmp.push({
         file_name: file.name,
         file_size: file.size,
-        from: file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2),
+        from: file.name.slice(((file.name.lastIndexOf('.') - 1) >>> 0) + 2),
         to: null,
         file_type: file.type,
         file,
@@ -153,7 +153,7 @@ export default function MyDropzone() {
     setActions(
       actions.map((action): ConvertAction => {
         if (action.file_name === file_name) {
-          console.log("FOUND");
+          console.log('FOUND');
           return {
             ...action,
             to,
@@ -161,7 +161,7 @@ export default function MyDropzone() {
         }
 
         return action;
-      }),
+      })
     );
   };
   const checkIsReady = (): void => {
@@ -360,7 +360,7 @@ export default function MyDropzone() {
                 className="rounded-xl font-semibold relative py-4 text-md flex gap-2 items-center w-full"
                 onClick={downloadAll}
               >
-                {actions.length > 1 ? "Download All" : "Download"}
+                {actions.length > 1 ? 'Download All' : 'Download'}
                 <HiOutlineDownload />
               </Button>
               <Button
@@ -402,17 +402,17 @@ export default function MyDropzone() {
       onDropRejected={() => {
         handleExitHover();
         toast({
-          variant: "error",
-          title: "Error uploading your file(s)",
-          description: "Allowed Files: Audio, Video and Images.",
+          variant: 'error',
+          title: 'Error uploading your file(s)',
+          description: 'Allowed Files: Audio, Video and Images.',
         });
       }}
       onError={() => {
         handleExitHover();
         toast({
-          variant: "error",
-          title: "Error uploading your file(s)",
-          description: "Allowed Files: Audio, Video and Images.",
+          variant: 'error',
+          title: 'Error uploading your file(s)',
+          description: 'Allowed Files: Audio, Video and Images.',
         });
       }}
     >

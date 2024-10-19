@@ -1,9 +1,9 @@
-"use client";
-import { Toast, toast as hotToast } from "react-hot-toast";
-import { CircleCheckIcon, CircleXIcon, WarningIcon } from "@/components/icons";
+'use client';
+import { Toast, toast as hotToast } from 'react-hot-toast';
+import { CircleCheckIcon, CircleXIcon, WarningIcon } from '@/components/icons';
 
 interface ToastProps extends Partial<Toast> {
-  variant?: "success" | "error" | "warning" | "default";
+  variant?: 'success' | 'error' | 'warning' | 'default';
   title?: string;
   description?: string;
 }
@@ -14,7 +14,7 @@ interface ToastProps extends Partial<Toast> {
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 export const toast = ({
-  variant = "default",
+  variant = 'default',
   title,
   description,
   ...props
@@ -23,7 +23,7 @@ export const toast = ({
     (t) => (
       <div
         className={`${
-          t.visible ? "animate-enter" : "animate-leave"
+          t.visible ? 'animate-enter' : 'animate-leave'
         }  bottom-4 left-4 z-50 max-w-md w-full pointer-events-auto shadow-lg rounded-lg`}
       >
         <div
@@ -33,7 +33,7 @@ export const toast = ({
             {getIcon(variant) && (
               <div
                 className={`flex size-10 items-center justify-center rounded-md ${getIconBgClass(
-                  variant,
+                  variant
                 )} text-primary-foreground`}
               >
                 {getIcon(variant)}
@@ -47,31 +47,31 @@ export const toast = ({
         </div>
       </div>
     ),
-    { ...props, position: props.position || "bottom-center" },
+    { ...props, position: props.position || 'bottom-center' }
   );
 };
 
 const getGradientClass = (variant?: string) => {
   switch (variant) {
-    case "success":
-      return "bg-gradient-to-r from-green-600 to-green-400";
-    case "error":
-      return "bg-gradient-to-r from-red-600 to-red-400";
-    case "warning":
-      return "bg-gradient-to-r from-yellow-600 to-yellow-400";
+    case 'success':
+      return 'bg-gradient-to-r from-green-600 to-green-400';
+    case 'error':
+      return 'bg-gradient-to-r from-red-600 to-red-400';
+    case 'warning':
+      return 'bg-gradient-to-r from-yellow-600 to-yellow-400';
     default:
-      return "bg-gradient-to-r from-violet-600 to-violet-400";
+      return 'bg-gradient-to-r from-violet-600 to-violet-400';
   }
 };
 
 const getIconBgClass = (variant?: string) => {
   switch (variant) {
-    case "success":
-      return "bg-green-500";
-    case "error":
-      return "bg-red-500";
-    case "warning":
-      return "bg-yellow-500";
+    case 'success':
+      return 'bg-green-500';
+    case 'error':
+      return 'bg-red-500';
+    case 'warning':
+      return 'bg-yellow-500';
     default:
       return;
   }
@@ -79,11 +79,11 @@ const getIconBgClass = (variant?: string) => {
 
 const getIcon = (variant?: string) => {
   switch (variant) {
-    case "success":
+    case 'success':
       return <CircleCheckIcon className="size-6" />;
-    case "error":
+    case 'error':
       return <CircleXIcon className="size-6" />;
-    case "warning":
+    case 'warning':
       return <WarningIcon className="size-6" />;
     default:
       return;

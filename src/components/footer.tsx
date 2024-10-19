@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "@nextui-org/react";
-import { siteConfig } from "@/config/site";
+import React from 'react';
+import { Link } from '@nextui-org/react';
+import { siteConfig } from '@/config/site';
 
 export const Footer = () => {
   return (

@@ -1,13 +1,13 @@
-import type { Metadata, Viewport } from "next";
-import { Providers } from "./providers";
-import { siteConfig } from "@/config/site";
-import { geistMono, geistSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { Toaster } from "react-hot-toast";
-import clsx from "clsx";
+import type { Metadata, Viewport } from 'next';
+import { Providers } from './providers';
+import { siteConfig } from '@/config/site';
+import { geistMono, geistSans } from '@/config/fonts';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import { Toaster } from 'react-hot-toast';
+import clsx from 'clsx';
 
-import "@/styles/globals.css";
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: {
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   creator: siteConfig.creator,
   keywords: siteConfig.keywords,
   icons: {
-    icon: "/favicon.ico",
+    icon: '/favicon.ico',
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
 };
 
@@ -39,13 +39,13 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
+          'min-h-screen bg-background font-sans antialiased',
           geistSans.variable,
-          geistMono.variable,
+          geistMono.variable
         )}
         suppressHydrationWarning
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <Toaster />

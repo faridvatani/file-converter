@@ -1,12 +1,12 @@
-import { ConvertAction } from "@/types";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { ConvertAction } from '@/types';
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { fetchFile, toBlobURL } from '@ffmpeg/util';
 
 // Bytes to size
 export function bytesToSize(bytes: number): String {
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
-  if (bytes === 0) return "0 Byte";
+  if (bytes === 0) return '0 Byte';
 
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   const size = (bytes / Math.pow(1024, i)).toFixed(2);
@@ -22,10 +22,10 @@ export function compressFileName(fileName: any): string {
   // Check if the fileName is longer than the maximum length
   if (fileName.length > maxSubstrLength) {
     // Extract the first part of the fileName (before the extension)
-    const fileNameWithoutExtension = fileName.split(".").slice(0, -1).join(".");
+    const fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
 
     // Extract the extension from the fileName
-    const fileExtension = fileName.split(".").pop();
+    const fileExtension = fileName.split('.').pop();
 
     // Calculate the length of characters to keep in the middle
     const charsToKeep =
@@ -36,11 +36,11 @@ export function compressFileName(fileName: any): string {
     const compressedFileName =
       fileNameWithoutExtension.substring(
         0,
-        maxSubstrLength - fileExtension.length - 3,
+        maxSubstrLength - fileExtension.length - 3
       ) +
-      "..." +
+      '...' +
       fileNameWithoutExtension.slice(-charsToKeep) +
-      "." +
+      '.' +
       fileExtension;
 
     return compressedFileName;
@@ -56,11 +56,11 @@ function getFileExtension(file_name: string) {
   if (match && match[1]) {
     return match[1];
   }
-  return ""; // No file extension found
+  return ''; // No file extension found
 }
 
 function removeFileExtension(file_name: string) {
-  const lastDotIndex = file_name.lastIndexOf(".");
+  const lastDotIndex = file_name.lastIndexOf('.');
   if (lastDotIndex !== -1) {
     return file_name.slice(0, lastDotIndex);
   }
@@ -69,45 +69,45 @@ function removeFileExtension(file_name: string) {
 
 export async function convert(
   ffmpeg: FFmpeg,
-  action: ConvertAction,
+  action: ConvertAction
 ): Promise<any> {
   const { file, to, file_name, file_type } = action;
   const input = getFileExtension(file_name);
-  const output = removeFileExtension(file_name) + "." + to;
+  const output = removeFileExtension(file_name) + '.' + to;
   ffmpeg.writeFile(input, await fetchFile(file));
 
   // FFMEG COMMANDS
   let ffmpeg_cmd: any = [];
   // 3gp video
-  if (to === "3gp")
+  if (to === '3gp')
     ffmpeg_cmd = [
-      "-i",
+      '-i',
       input,
-      "-r",
-      "20",
-      "-s",
-      "352x288",
-      "-vb",
-      "400k",
-      "-acodec",
-      "aac",
-      "-strict",
-      "experimental",
-      "-ac",
-      "1",
-      "-ar",
-      "8000",
-      "-ab",
-      "24k",
+      '-r',
+      '20',
+      '-s',
+      '352x288',
+      '-vb',
+      '400k',
+      '-acodec',
+      'aac',
+      '-strict',
+      'experimental',
+      '-ac',
+      '1',
+      '-ar',
+      '8000',
+      '-ab',
+      '24k',
       output,
     ];
-  else ffmpeg_cmd = ["-i", input, output];
+  else ffmpeg_cmd = ['-i', input, output];
 
   // execute cmd
   await ffmpeg.exec(ffmpeg_cmd);
 
   const data = (await ffmpeg.readFile(output)) as any;
-  const blob = new Blob([data], { type: file_type.split("/")[0] });
+  const blob = new Blob([data], { type: file_type.split('/')[0] });
   const url = URL.createObjectURL(blob);
   return { url, output };
 }
@@ -115,10 +115,10 @@ export async function convert(
 // load FFmpeg
 export async function loadFfmpeg(): Promise<FFmpeg> {
   const ffmpeg = new FFmpeg();
-  const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd";
+  const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd';
   await ffmpeg.load({
-    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
   });
   return ffmpeg;
 }
