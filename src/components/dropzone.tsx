@@ -42,7 +42,7 @@ export default function MyDropzone() {
   const [is_done, setIsDone] = useState<boolean>(false);
   const ffmpegRef = useRef<any>(null);
   const [defaultValues, setDefaultValues] = useState<string>("video");
-  const [selcted, setSelected] = useState<string>("...");
+  const [selected, setSelected] = useState<string>("...");
 
   const accepted_files = {
     "image/*": [
@@ -251,7 +251,7 @@ export default function MyDropzone() {
                     updateAction(action.file_name, value);
                   }}
                   placeholder="Select Format"
-                  value={selcted}
+                  value={selected}
                   scrollShadowProps={{
                     isEnabled: false,
                   }}
