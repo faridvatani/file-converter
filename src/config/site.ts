@@ -60,14 +60,13 @@ Elevate your creative projects with the boundless potential of File Converter. J
 `;
 
 export const contactUsPageDescription: string = `
-We’re here to help! If you have any questions, concerns, or feedback, feel free to reach out to us. We value your input and are committed to providing the best possible experience with File Converter.
+We’re here to help and appreciate your feedback! If you have any questions, concerns, or suggestions related to File Converter, the best way to reach us is by creating an issue on our GitHub repository: [File Converter](https://github.com/faridvatani/file-converter.)
 
-- **Email:** For general inquiries or support, contact us at **support@fileconverter.com**.
-- **Technical Support:** Encountering an issue with our services? Let us know by emailing **techsupport@fileconverter.com**, and we’ll work to resolve it promptly.
-- **Feedback and Suggestions:** We’d love to hear how we can improve! Send your thoughts to **feedback@fileconverter.com**.
-- **Business Inquiries:** Interested in partnerships or collaborations? Reach out to us at **business@fileconverter.com**.
+Whether you're encountering a bug, have a feature request, or just want to share your thoughts on improving the project, leaving an issue on GitHub allows us to track and address your input efficiently.
 
-We aim to respond to all inquiries within 24-48 hours. Thank you for choosing File Converter!
+By using GitHub Issues, we can prioritize and respond to your feedback faster, ensuring a smoother experience for everyone.
+
+Thank you for helping us improve File Converter!
 `;
 
 export const privacyPolicyPageDescription: string = `
@@ -98,7 +97,7 @@ At File Converter, we are dedicated to protecting your privacy. This Privacy Pol
    - We may update this Privacy Policy at any time without prior notice. Any changes will take effect immediately upon being posted on this page. The date of the most recent revision will always be indicated at the top.
 
 8. **Contact Us**
-   - If you have any questions or concerns about this Privacy Policy or the data we collect, please contact us at **support@fileconverter.com**.
+   - If you have any questions or concerns about this Privacy Policy or the data we collect, the best way to reach us is by creating an issue on our GitHub repository: **[File Converter](https://github.com/faridvatani/file-converter.)**.
 
 By using File Converter, you agree to the practices described in this Privacy Policy. If you do not agree, please discontinue use of our services. Thank you for trusting us with your privacy.
 `;
