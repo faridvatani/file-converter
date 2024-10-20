@@ -218,7 +218,7 @@ export default function MyDropzone() {
             className="w-full py-4 space-y-2 md:py-0 relative cursor-pointer rounded-xl border h-fit md:h-20 px-4 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between"
           >
             {!is_loaded && (
-              <Skeleton className="h-full w-full -ml-10 cursor-progress absolute rounded-xl" />
+              <Skeleton className="h-full w-full -ml-10 cursor-progress absolute rounded-xl z-40" />
             )}
             <div className="flex gap-4 items-center whitespace-wrap truncate">
               <span className="text-2xl text-orange-600">
