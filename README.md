@@ -14,7 +14,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Convert audio to another format
 - Convert multiple files at once
 - Download the converted file
+- Drag and drop files
 - Responsive design
+- PWA support
 - Dark mode
 
 ## Getting Started
