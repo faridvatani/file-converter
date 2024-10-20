@@ -29,7 +29,7 @@ import {
   bytesToSize,
 } from '@/utils';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
-import fileToIcon from '@/types/file-to-icon';
+import fileToIcon from '@/utils/file-to-icon';
 import { fileExtensions } from '@/config/site';
 
 export default function MyDropzone() {
