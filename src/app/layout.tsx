@@ -9,6 +9,8 @@ import clsx from 'clsx';
 
 import '@/styles/globals.css';
 
+const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === 'production';
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -18,8 +20,9 @@ export const metadata: Metadata = {
   creator: siteConfig.creator,
   keywords: siteConfig.keywords,
   icons: {
-    icon: '/favicon.ico',
+    icon: isProduction ? '/file-converter/favicon.ico' : '/favicon.ico',
   },
+  ...(isProduction && { manifest: '/file-converter/manifest.json' }),
 };
 
 export const viewport: Viewport = {
