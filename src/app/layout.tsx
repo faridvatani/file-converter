@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   icons: {
     icon: isProduction ? '/file-converter/favicon.ico' : '/favicon.ico',
   },
-  ...(isProduction && { manifest: '/file-converter/manifest.json' }),
+  manifest: isProduction ? '/file-converter/manifest.json' : '/manifest',
 };
 
 export const viewport: Viewport = {
