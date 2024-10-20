@@ -116,13 +116,58 @@ export async function convert(
   return { url, output };
 }
 
+async function retry<T>(
+  fn: () => Promise<T>,
+  retries: number,
+  errorMessage: string
+): Promise<T> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (attempt === retries) {
+        if (error instanceof Error) {
+          throw new Error(`${errorMessage}: ${error.message}`);
+        } else {
+          throw new Error(`${errorMessage}: Unknown error occurred`);
+        }
+      }
+      if (error instanceof Error) {
+        console.warn(
+          `Attempt ${attempt} failed: ${error.message}. Retrying...`
+        );
+      } else {
+        console.warn(
+          `Attempt ${attempt} failed: Unknown error occurred. Retrying...`
+        );
+      }
+    }
+  }
+  throw new Error('Max retries reached');
+}
+
 // load FFmpeg
-export async function loadFfmpeg(): Promise<FFmpeg> {
+export async function loadFfmpeg(retries = 3): Promise<FFmpeg> {
   const ffmpeg = new FFmpeg();
   const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.2/dist/umd';
-  await ffmpeg.load({
-    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-  });
+
+  const coreURL = await retry(
+    () => toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+    retries,
+    'Failed to construct core URL'
+  );
+
+  const wasmURL = await retry(
+    () => toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+    retries,
+    'Failed to construct wasm URL'
+  );
+
+  await retry(
+    () => ffmpeg.load({ coreURL, wasmURL }),
+    retries,
+    'Failed to load FFmpeg'
+  );
+
   return ffmpeg;
 }
