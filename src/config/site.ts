@@ -31,6 +31,9 @@ export const siteConfig = {
     twitter: 'https://twitter.com/',
     discord: 'https://discord.gg/',
   },
+  analytics: {
+    postHog: 'https://us.posthog.com/shared/pBfLk1-zACwa1u9hHFhBlziFjdpwOQ',
+  },
 };
 
 export const aboutUsPageDescription: string = `

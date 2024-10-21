@@ -12,15 +12,25 @@ export const Footer = () => {
             reserved.
           </p>
         </div>
-        <Link
-          isExternal
-          className="flex items-center gap-1 text-default-600"
-          href="https://nextui.org/"
-          title="nextui.org homepage"
-        >
-          <span className="text-default-600">Powered by</span>
-          <p className="text-primary">NextUI</p>
-        </Link>
+        <div className="flex items-center flex-col md:flex-row gap-4">
+          <Link
+            isExternal
+            color="foreground"
+            href={siteConfig.analytics.postHog}
+            showAnchorIcon
+          >
+            Analytics
+          </Link>
+          <Link
+            isExternal
+            className="flex items-center gap-1 text-default-600"
+            href="https://nextui.org/"
+            title="nextui.org homepage"
+          >
+            <span className="text-default-600">Powered by</span>
+            <p className="text-primary">NextUI</p>
+          </Link>
+        </div>
       </div>
     </footer>
   );

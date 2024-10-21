@@ -2,12 +2,18 @@ import type { Metadata, Viewport } from 'next';
 import { Providers } from './providers';
 import { prefix, siteConfig } from '@/config/site';
 import { geistMono, geistSans } from '@/config/fonts';
-import { CSPostHogProvider } from '@/components/CSPostHogProvider';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Toaster } from 'react-hot-toast';
+import dynamic from 'next/dynamic';
 import clsx from 'clsx';
-
+import { PHProvider } from '@/components/analytics/CSPostHogProvider';
+const PostHogPageView = dynamic(
+  () => import('@/components/analytics/PostHogPageView'),
+  {
+    ssr: false,
+  }
+);
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -44,7 +50,7 @@ export default function RootLayout({
           crossOrigin="use-credentials"
         />
       </head>
-      <CSPostHogProvider>
+      <PHProvider>
         <body
           className={clsx(
             'min-h-screen bg-background font-sans antialiased',
@@ -53,6 +59,7 @@ export default function RootLayout({
           )}
           suppressHydrationWarning
         >
+          <PostHogPageView />
           <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
             <div className="relative flex flex-col h-screen">
               <Navbar />
@@ -64,7 +71,7 @@ export default function RootLayout({
             </div>
           </Providers>
         </body>
-      </CSPostHogProvider>
+      </PHProvider>
     </html>
   );
 }
