@@ -8,7 +8,6 @@ import { Toaster } from 'react-hot-toast';
 import clsx from 'clsx';
 
 import '@/styles/globals.css';
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -62,7 +61,6 @@ export default function RootLayout({
             <Footer />
           </div>
         </Providers>
-        <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
       </body>
     </html>
   );
