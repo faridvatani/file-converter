@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Providers } from './providers';
 import { prefix, siteConfig } from '@/config/site';
 import { geistMono, geistSans } from '@/config/fonts';
+import { CSPostHogProvider } from '@/components/CSPostHogProvider';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Toaster } from 'react-hot-toast';
@@ -43,25 +44,27 @@ export default function RootLayout({
           crossOrigin="use-credentials"
         />
       </head>
-      <body
-        className={clsx(
-          'min-h-screen bg-background font-sans antialiased',
-          geistSans.variable,
-          geistMono.variable
-        )}
-        suppressHydrationWarning
-      >
-        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
-            <Toaster />
-            <main className="container mx-auto max-w-full pt-4 px-6 flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </Providers>
-      </body>
+      <CSPostHogProvider>
+        <body
+          className={clsx(
+            'min-h-screen bg-background font-sans antialiased',
+            geistSans.variable,
+            geistMono.variable
+          )}
+          suppressHydrationWarning
+        >
+          <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
+            <div className="relative flex flex-col h-screen">
+              <Navbar />
+              <Toaster />
+              <main className="container mx-auto max-w-full pt-4 px-6 flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </Providers>
+        </body>
+      </CSPostHogProvider>
     </html>
   );
 }
