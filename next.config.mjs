@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
-const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === 'production';
+
+const prefix = process.env.NEXT_PUBLIC_BASE_PATH ?? '/';
 
 const nextConfig = {
-  basePath: isProduction ? '/file-converter' : '',
-  assetPrefix: isProduction ? '/file-converter' : '',
+  output: 'export',
+  basePath: prefix,
+  assetPrefix: prefix,
   trailingSlash: true,
 };
 

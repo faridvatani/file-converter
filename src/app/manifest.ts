@@ -1,14 +1,12 @@
 import type { MetadataRoute } from 'next';
 
-const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === 'production';
-
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'File Converter',
     short_name: 'File Converter',
     description: 'Convert files to different formats',
-    scope: isProduction ? '/file-converter/' : '/',
-    start_url: isProduction ? '/file-converter/' : '/',
+    scope: './',
+    start_url: './',
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#000000',
