@@ -77,11 +77,11 @@ export const privacyPolicyPageDescription: string = `
 At File Converter, we are dedicated to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose personal information when you use our website and services. Please review this policy carefully to understand how we handle your data.
 
 1. **Information We Collect**
-   - We collect limited data through Google Analytics to enhance your user experience. This includes:
+   - We collect limited data through Analytics to enhance your user experience. This includes:
      - **Usage Information:** We may gather details about your interactions with our site, such as pages visited, IP address, browser type, device type, and referral URLs. This information helps us understand how users engage with our platform to improve its functionality.
 
 2. **How We Use Your Information**
-   - The data collected through Google Analytics is solely used to understand user behavior and optimize our website’s performance. We do not sell, rent, or share your information with third parties.
+   - The data collected through Analytics is solely used to understand user behavior and optimize our website’s performance. We do not sell, rent, or share your information with third parties.
 
 3. **Cookies and Tracking Technologies**
    - We use cookies and similar technologies to track your interactions with our website. You can manage cookie preferences through your browser settings, but note that disabling cookies may impact your site experience.
