@@ -1,5 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
+export const prefix: string = process.env.NEXT_PUBLIC_BASE_PATH ?? '/';
+
 export const siteConfig = {
   name: 'File Converter',
   description: 'Convert your files with ease.',

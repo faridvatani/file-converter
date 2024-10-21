@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Providers } from './providers';
-import { siteConfig } from '@/config/site';
+import { prefix, siteConfig } from '@/config/site';
 import { geistMono, geistSans } from '@/config/fonts';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   creator: siteConfig.creator,
   keywords: siteConfig.keywords,
   icons: {
-    icon: './favicon.ico',
+    icon: prefix + '/favicon.ico',
   },
 };
 
@@ -37,7 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="./manifest.webmanifest" />
+        <link
+          rel="manifest"
+          href={prefix + '/manifest.webmanifest'}
+          crossOrigin="use-credentials"
+        />
       </head>
       <body
         className={clsx(
