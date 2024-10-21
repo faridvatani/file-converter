@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   icons: {
     icon: './favicon.ico',
   },
+  manifest: './manifest.webmanifest',
 };
 
 export const viewport: Viewport = {
